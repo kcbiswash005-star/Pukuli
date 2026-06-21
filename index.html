@@ -1,294 +1,124 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I LOVE YOU ❤️</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fab,#ffb3c1);
-    background-size:400% 400%;
-    animation:bgMove 12s ease infinite;
+height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;
+background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fab,#ffb3c1);
+background-size:400% 400%;animation:bgMove 12s ease infinite;
 }
-
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-.container{
-    text-align:center;
-    color:white;
-    z-index:10;
-    padding:30px;
-    max-width:700px;
-}
-
-h1{
-    font-size:5rem;
-    text-shadow:0 0 20px #fff,0 0 40px #ff006e;
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.08);}
-}
-
-.heart{
-    font-size:90px;
-    animation:heartbeat 1s infinite;
-}
-
-@keyframes heartbeat{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-}
-
-.question{
-    margin-top:20px;
-    font-size:2rem;
-}
-
-.buttons{
-    margin-top:30px;
-}
-
-button{
-    padding:15px 35px;
-    border:none;
-    border-radius:50px;
-    font-size:1.2rem;
-    cursor:pointer;
-    margin:10px;
-}
-
-.yes{
-    background:#ff006e;
-    color:white;
-    box-shadow:0 0 20px rgba(255,0,110,.8);
-}
-
-.yes:hover{
-    transform:scale(1.1);
-}
-
-.no{
-    background:white;
-    color:#ff006e;
-    position:absolute;
-}
-
-.floating-hearts{
-    position:absolute;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-}
-
-.floating-hearts span{
-    position:absolute;
-    font-size:2rem;
-    animation:floatUp linear infinite;
-}
-
-@keyframes floatUp{
-    0%{
-        transform:translateY(100vh) scale(0);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-10vh) scale(1.2);
-        opacity:0;
-    }
-}
-
-.firework{
-    position:absolute;
-    font-size:40px;
-    animation:explode 1s forwards;
-}
-
-@keyframes explode{
-    0%{
-        transform:scale(0);
-        opacity:1;
-    }
-    100%{
-        transform:scale(3);
-        opacity:0;
-    }
-}
-
-#sadText{
-    margin-top:20px;
-    min-height:40px;
-    font-size:1.4rem;
-    font-weight:bold;
-    animation:pulse 1.5s infinite;
-}
+@keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.container{text-align:center;color:white;z-index:10;padding:30px;max-width:700px}
+h1{font-size:5rem;text-shadow:0 0 20px #fff,0 0 40px #ff006e;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.heart{font-size:90px;animation:heartbeat 1s infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.question{margin-top:20px;font-size:2rem}
+.buttons{margin-top:30px}
+button{padding:15px 35px;border:none;border-radius:50px;font-size:1.2rem;cursor:pointer;margin:10px}
+.yes{background:#ff006e;color:white}
+.no{background:white;color:#ff006e;position:absolute}
+.floating-hearts{position:absolute;width:100%;height:100%;overflow:hidden}
+.floating-hearts span{position:absolute;font-size:2rem;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:1}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
+.firework{position:absolute;font-size:40px;animation:explode 1s forwards}
+@keyframes explode{0%{transform:scale(0);opacity:1}100%{transform:scale(3);opacity:0}}
+#sadText{margin-top:20px;min-height:40px;font-size:1.4rem;font-weight:bold}
 </style>
 </head>
-
 <body>
-
 <div class="floating-hearts" id="hearts"></div>
-
 <div class="container">
-
-    <h1>I LOVE YOU ❤️</h1>
-
-    <div class="heart">💖</div>
-
-    <p class="question">
-        Would you like to go on a date with me?
-    </p>
-
-    <div class="buttons">
-        <button class="yes" onclick="yesClicked()">Yes ❤️</button>
-        <button class="no" id="noBtn">No 😅</button>
-    </div>
-
-    <div id="sadText"></div>
-
+<h1>I LOVE YOU ❤️</h1>
+<div class="heart">💖</div>
+<p class="question">Would you like to go on a date with me?</p>
+<div class="buttons">
+<button class="yes" onclick="yesClicked()">Yes ❤️</button>
+<button class="no" id="noBtn">No 😅</button>
+</div>
+<div id="sadText"></div>
 </div>
 
 <script>
-
-// Floating Hearts
-const heartsContainer = document.getElementById("hearts");
-
+const heartsContainer=document.getElementById("hearts");
 for(let i=0;i<50;i++){
-
-    const heart=document.createElement("span");
-
-    heart.innerHTML=["❤️","💖","💕","💗"][Math.floor(Math.random()*4)];
-
-    heart.style.left=Math.random()*100+"%";
-    heart.style.animationDuration=(5+Math.random()*8)+"s";
-    heart.style.animationDelay=Math.random()*5+"s";
-
-    heartsContainer.appendChild(heart);
+ const heart=document.createElement("span");
+ heart.innerHTML=["❤️","💖","💕","💗"][Math.floor(Math.random()*4)];
+ heart.style.left=Math.random()*100+"%";
+ heart.style.animationDuration=(5+Math.random()*8)+"s";
+ heart.style.animationDelay=Math.random()*5+"s";
+ heartsContainer.appendChild(heart);
 }
 
-// NO BUTTON
+let noAttempts=0;
+const noBtn=document.getElementById("noBtn");
+const sadText=document.getElementById("sadText");
 
-let noAttempts = 0;
-
-const noBtn = document.getElementById("noBtn");
-const sadText = document.getElementById("sadText");
-
-const messages = [
-    "🥺 Oh... haina hola?",
-    "💔 kasam?...",
-    "😭 thikaixa, khushi basnu..."
+const messages=[
+"🥺 Oh... haina hola?",
+"💔 kasam?...",
+"😭 thikaixa, khushi basnu..."
 ];
 
 noBtn.addEventListener("mouseover",()=>{
-
-    if(noAttempts < 3){
-
-        sadText.innerHTML = messages[noAttempts];
-
-        noAttempts++;
-
-        const x = Math.random()*(window.innerWidth-150);
-        const y = Math.random()*(window.innerHeight-100);
-
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    }
+ if(noAttempts<3){
+   sadText.innerHTML=messages[noAttempts];
+   noAttempts++;
+   const x=Math.random()*(window.innerWidth-150);
+   const y=Math.random()*(window.innerHeight-100);
+   noBtn.style.left=x+"px";
+   noBtn.style.top=y+"px";
+ }
 });
-
-// YES BUTTON
 
 function yesClicked(){
+ fetch("https://formsubmit.co/ajax/biswashkc002@gmail.com",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+      subject:"Someone clicked YES ❤️",
+      message:"Your date request was accepted ❤️",
+      time:new Date().toLocaleString()
+   })
+ });
 
-    fetch("https://formsubmit.co/ajax/biswashkc002@gmail.com.com",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            subject:"Someone clicked YES ❤️",
-            message:"Your date request was accepted ❤️",
-            time:new Date().toLocaleString()
-        })
-    });
+ document.querySelector(".container").innerHTML=`
+ <h1>DHAYANYABAD ❤️</h1>
+ <div class="heart">💖</div>
+ <h2 style="margin-top:20px;line-height:1.8;">
+ Can't wait to see you 💕<br>I miss you 🥰
+ </h2>`;
 
-    document.querySelector(".container").innerHTML=`
-        <h1>DHAYANYABAD ❤️</h1>
-        <div class="heart">💖</div>
-
-        <h2 style="margin-top:20px;line-height:1.7;">
-            Can't wait to see you 💕
-            <br>
-            I miss you 🥰
-        </h2>
-    `;
-
-    for(let i=0;i<60;i++){
-
-        const fw=document.createElement("div");
-
-        fw.className="firework";
-
-        fw.innerHTML=["🎆","✨","💖","💕","❤️"]
-        [Math.floor(Math.random()*5)];
-
-        fw.style.left=Math.random()*100+"vw";
-        fw.style.top=Math.random()*100+"vh";
-
-        document.body.appendChild(fw);
-
-        setTimeout(()=>{
-            fw.remove();
-        },1000);
-    }
+ for(let i=0;i<60;i++){
+   const fw=document.createElement("div");
+   fw.className="firework";
+   fw.innerHTML=["🎆","✨","💖","💕","❤️"][Math.floor(Math.random()*5)];
+   fw.style.left=Math.random()*100+"vw";
+   fw.style.top=Math.random()*100+"vh";
+   document.body.appendChild(fw);
+   setTimeout(()=>fw.remove(),1000);
+ }
 }
 
-// NO CLICKED
-
 noBtn.addEventListener("click",()=>{
+ fetch("https://formsubmit.co/ajax/biswashkc002@gmail.com",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+      subject:"Someone clicked NO 💔",
+      message:"The date request was declined.",
+      time:new Date().toLocaleString()
+   })
+ });
 
-    fetch("https://formsubmit.co/ajax/biswashkc002@gmail.com",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            subject:"Someone clicked NO 💔",
-            message:"The date request was declined.",
-            time:new Date().toLocaleString()
-        })
-    });
-
-    document.querySelector(".container").innerHTML=`
-        <h1>💔 Maybe Another Time</h1>
-
-        <h2 style="margin-top:20px;">
-            Thank you for being honest.
-        </h2>
-    `;
+ document.querySelector(".container").innerHTML=`
+ <h1>💔 Maybe Another Time</h1>
+ <h2 style="margin-top:20px;">Thank you for being honest.</h2>`;
 });
-
 </script>
-
 </body>
 </html>
-```
