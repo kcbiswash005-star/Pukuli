@@ -7,53 +7,113 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{
-height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
 background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fab,#ffb3c1);
-background-size:400% 400%;animation:bgMove 12s ease infinite;
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
 }
 @keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
 .container{
-width:390px;max-width:92vw;height:700px;
-text-align:center;color:white;padding:30px 20px;
-background:rgba(255,255,255,.08);backdrop-filter:blur(10px);
-border-radius:30px;display:flex;flex-direction:column;
-justify-content:center;align-items:center;position:relative;z-index:10;
+width:390px;
+max-width:92vw;
+height:700px;
+padding:30px 20px;
+border-radius:30px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+position:relative;
+z-index:2;
 }
-h1{font-size:3rem;text-shadow:0 0 20px #fff,0 0 40px #ff006e;animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-.heart{font-size:80px;animation:heartbeat 1s infinite}
-@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-.question{margin-top:20px;font-size:1.5rem;line-height:1.4}
-.buttons{margin-top:30px}
-button{padding:15px 35px;border:none;border-radius:50px;font-size:1.1rem;cursor:pointer;margin:10px}
-.yes{background:#ff006e;color:#fff}
-.no{background:#fff;color:#ff006e;position:fixed;z-index:999}
+
+h1{
+font-size:3.5rem;
+text-shadow:0 0 20px #fff,0 0 40px #ff006e;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.heart{font-size:90px;animation:beat 1s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+
+.question{
+margin-top:20px;
+font-size:1.4rem;
+line-height:1.4;
+}
+
+button{
+padding:15px 35px;
+border:none;
+border-radius:50px;
+font-size:1.2rem;
+cursor:pointer;
+margin-top:20px;
+}
+
+.yes{background:#ff006e;color:white}
+.no{background:white;color:#ff006e}
+
 #message{
 margin-top:20px;
-font-size:1.2rem;
+font-size:1.3rem;
 font-weight:bold;
 min-height:40px;
-text-align:center;
 }
-.floating-hearts{position:absolute;width:100%;height:100%;overflow:hidden}
-.floating-hearts span{position:absolute;font-size:2rem;animation:floatUp linear infinite}
-@keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:1}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
-.firework{position:absolute;font-size:40px;animation:explode 1s forwards}
-@keyframes explode{0%{transform:scale(0);opacity:1}100%{transform:scale(3);opacity:0}}
+
+.floating-hearts{
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+}
+
+.floating-hearts span{
+position:absolute;
+font-size:2rem;
+animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(100vh) scale(0);opacity:1}
+100%{transform:translateY(-10vh) scale(1.2);opacity:0}
+}
+
+.firework{
+position:absolute;
+font-size:40px;
+animation:explode 1s forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(0);opacity:1}
+100%{transform:scale(3);opacity:0}
+}
 </style>
 </head>
 <body>
+
 <div class="floating-hearts" id="hearts"></div>
 
-<div class="container">
-<h1>I LOVE YOU ❤️</h1>
-<div class="heart">💖</div>
+<div class="container" id="container">
+<h1>I LOVE YOU</h1>
+<div class="heart">❤️</div>
+<div style="font-size:80px">💖</div>
+
 <p class="question">Would you like to go on a date with me?</p>
 
-<div class="buttons">
 <button class="yes" onclick="yesClicked()">Yes ❤️</button>
 <button class="no" id="noBtn">No 😅</button>
-</div>
 
 <div id="message"></div>
 </div>
@@ -70,7 +130,7 @@ for(let i=0;i<50;i++){
 
 const noBtn=document.getElementById("noBtn");
 const msg=document.getElementById("message");
-let noAttempts=0;
+let attempts=0;
 
 const texts=[
 "Oh... haina hola?",
@@ -78,22 +138,24 @@ const texts=[
 "Thikaixa, khushi basnu..."
 ];
 
-function corners(){
- return [
-  {left:"20px",top:"20px"},
-  {left:(window.innerWidth-140)+"px",top:"20px"},
-  {left:(window.innerWidth-140)+"px",top:(window.innerHeight-90)+"px"}
- ];
-}
-
 noBtn.addEventListener("mouseover",()=>{
- if(noAttempts<3){
-   msg.innerText=texts[noAttempts];
-   const c=corners()[noAttempts];
-   noBtn.style.left=c.left;
-   noBtn.style.top=c.top;
-   noAttempts++;
+ if(attempts===0){
+   msg.innerText=texts[0];
+   noBtn.style.position="fixed";
+   noBtn.style.left="30px";
+   noBtn.style.top="30px";
  }
+ else if(attempts===1){
+   msg.innerText=texts[1];
+   noBtn.style.left=(window.innerWidth-140)+"px";
+   noBtn.style.top="30px";
+ }
+ else if(attempts===2){
+   msg.innerText=texts[2];
+   noBtn.style.left=(window.innerWidth-140)+"px";
+   noBtn.style.top=(window.innerHeight/2-30)+"px";
+ }
+ attempts++;
 });
 
 function yesClicked(){
@@ -107,11 +169,12 @@ time:new Date().toLocaleString()
 })
 });
 
-document.querySelector(".container").innerHTML=`
+document.getElementById("container").innerHTML=`
 <h1>DHAYANYABAD ❤️</h1>
 <div class="heart">💖</div>
-<h2 style="margin-top:20px;line-height:1.8;">
-Can't wait to see you 💕<br>I miss you 🥰
+<h2 style="margin-top:20px;line-height:1.8">
+Can't wait to see you 💕<br>
+I miss you 🥰
 </h2>`;
 
 for(let i=0;i<60;i++){
@@ -136,9 +199,9 @@ time:new Date().toLocaleString()
 })
 });
 
-document.querySelector(".container").innerHTML=`
+document.getElementById("container").innerHTML=`
 <h1>Maybe Another Time</h1>
-<h2 style="margin-top:20px;">Thank you for being honest.</h2>`;
+<h2 style="margin-top:20px">Thank you for being honest.</h2>`;
 });
 </script>
 </body>
